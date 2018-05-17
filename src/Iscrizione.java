@@ -1,33 +1,38 @@
+import java.time.LocalDateTime;
 
 public class Iscrizione 
 {
 	private String nome;
 	private String cognome;
 	private int id;
-	private String dataPartenza;
+	private LocalDateTime data;
 	private String destinazione;
 	
 	
+	//CORTUTTORI
 	
-	public Iscrizione(String nome, String cognome, int id,String dataPartenza, String destinazione)
+	public Iscrizione(String nome, String cognome, int id,LocalDateTime dataPartenza, String destinazione)
 	{
 		setNome(nome);
 		setCognome(cognome);
 		setId(id);
-		setDataPartenza(dataPartenza);
+		setData(dataPartenza);
 		setDestinazione(destinazione);
 	}
 	
+	
+
 	public Iscrizione(Iscrizione persona)
 	{
 		setNome(persona.getNome());
 		setCognome(persona.getCognome());
 		setId(persona.getId());
-		setDataPartenza(persona.getDataPartenza());
+		setData(persona.getData());
 		setDestinazione(persona.getDestinazione());
 	}
 
 	
+	//GETTER E SETTER
 
 	public String getNome()
 	{
@@ -40,7 +45,8 @@ public class Iscrizione
 		this.nome = nome;
 	}
 
-	public String getCognome() {
+	public String getCognome()
+	{
 		return cognome;
 	}
 
@@ -63,32 +69,36 @@ public class Iscrizione
 	}
 
 
-	public String getDataPartenza() 
-	{
-		return dataPartenza;
-	}
-
-
-	public void setDataPartenza(String dataPartenza)
-	{
-		this.dataPartenza = dataPartenza;
-	}
-
-
 	public String getDestinazione() 
 	{
 		return destinazione;
 	}
 
+	
 	public void setDestinazione(String destinazione) 
 	{
 		this.destinazione = destinazione;
 	}
+
+
+	public LocalDateTime getData() 
+	{
+		return data;
+	}
+
+	public void setData(LocalDateTime data) 
+	{
+		this.data = data;
+	}
 	
+	//METODI VARI
 	public String toString()
 	{
-		return (getId()+" "+getNome()+" "+getCognome()+" "+getDataPartenza()+" "+getDestinazione()+" ");
+		return (getId()+" "+getNome()+" "+getCognome()+" "+getData()+" "+getDestinazione()+" ");
 	}
+	
+	
+	
 	
 }
 
