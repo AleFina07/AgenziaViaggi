@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class Iscrizione 
@@ -5,13 +6,13 @@ public class Iscrizione
 	private String nome;
 	private String cognome;
 	private int id;
-	private LocalDateTime data;
+	private LocalDate data;
 	private String destinazione;
 	
 	
 	//CORTUTTORI
 	
-	public Iscrizione(String nome, String cognome, int id,LocalDateTime dataPartenza, String destinazione)
+	public Iscrizione(String nome, String cognome, int id,LocalDate dataPartenza, String destinazione)
 	{
 		setNome(nome);
 		setCognome(cognome);
@@ -81,14 +82,14 @@ public class Iscrizione
 	}
 
 
-	public LocalDateTime getData() 
+	public LocalDate getData() 
 	{
 		return data;
 	}
 
-	public void setData(LocalDateTime data) 
+	public void setData(LocalDate dataPartenza) 
 	{
-		this.data = data;
+		this.data = dataPartenza;
 	}
 	
 	//METODI VARI

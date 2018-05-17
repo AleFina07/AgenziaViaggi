@@ -1,29 +1,32 @@
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class MainClass {
 
 	public static void main(String[] args) 
 	{
-		LocalDateTime dataPartenza1=LocalDateTime.of(2018 , 5, 31, 0, 0);
-		LocalDateTime dataPartenza2=LocalDateTime.of(2018 , 7, 6, 0, 0);
-		LocalDateTime dataPartenza3=LocalDateTime.of(2018 , 8, 13, 0, 0);
+		LocalDate dataPartenza1=LocalDate.of(2018 , 5, 31);
+		LocalDate dataPartenza2=LocalDate.of(2018 , 7, 6);
+		LocalDate dataPartenza3=LocalDate.of(2018 , 8, 13);
 		Iscrizione i1=new Iscrizione("Alessandro", "Finazzi"+" ", 1, dataPartenza1,"Maldive");
 		Iscrizione i2=new Iscrizione("Alessandra", "Finazzo"+" ", 1, dataPartenza2,"Caraibi");
 		Iscrizione i3=new Iscrizione("Alessandru", "Finassi"+" ", 1, dataPartenza3, "Egitto");
 			
 		
+		ListaIscrizioni l1=new ListaIscrizioni();
+		l1.inserisciInTesta(i1);
+		l1.inserisciInTesta(i2);
+		l1.inserisciInTesta(i3);
 		
-			System.out.println(i1.toString());
+		System.out.println(l1.toString());
 		
-		
-		
-		//***************scrittura*********************
+				//***************scrittura*********************
 				try 
 				{
-					TextFile file=new TextFile("prova.txt", 'W');
-					file.toFile("Prova1");
-					file.toFile("Prova2");
+					TextFile file=new TextFile("iscrizioni.txt", 'W');
+					file.toFile("Iscrizione1");
+					file.toFile("Iscrizione2");
 					file.toFile("Prova3");
 					file.closeFile();
 					System.out.println("Scrittura effettuata correttamente");
@@ -44,7 +47,7 @@ public class MainClass {
 				
 				try 
 				{
-					file2=new TextFile("prova.txt", 'R');
+					file2=new TextFile("iscrizioni.txt", 'R');
 					while(true)
 					{
 						rigaLetta=file2.fromFile();
