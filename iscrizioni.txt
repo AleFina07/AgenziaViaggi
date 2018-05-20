@@ -1,3 +1,1 @@
-Iscrizione1
-Iscrizione2
-Prova3
+1;Alessandro;Finazzi;2018-08-22;miami;

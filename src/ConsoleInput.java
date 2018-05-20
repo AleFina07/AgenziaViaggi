@@ -1,6 +1,10 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 
 public class ConsoleInput 
 {
@@ -49,7 +53,7 @@ public class ConsoleInput
 		return (Boolean.parseBoolean(reader.readLine()));
 	}
 	
-	public char readsChar() throws IOException
+	public char readChar() throws IOException
 	{
 		return (reader.readLine().charAt(0));
 	}
@@ -58,6 +62,13 @@ public class ConsoleInput
 	{
 		return reader.readLine();
 	}
+	
+	public Date readDate() throws ParseException, IOException
+	{
+		SimpleDateFormat data= new SimpleDateFormat("dd/MM/yyyy");
+		return (data.parse(reader.readLine()));
+	}
+	
 {
 		
 	}

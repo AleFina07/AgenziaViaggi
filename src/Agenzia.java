@@ -1,10 +1,15 @@
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
-public class ListaIscrizioni 
+public class Agenzia
 {
 	private Nodo head;
 	private int elementi;
 	
-	public ListaIscrizioni()
+	public Agenzia()
 	{
 		head=null;
 		elementi=0;
@@ -14,10 +19,12 @@ public class ListaIscrizioni
 	{
 		return elementi;
 	}
+	
 	//crea un nuovo nodo della lista che punta al nodo "link"
-	private Nodo creaNodo(Iscrizione persona, Nodo link)
+	
+	private Nodo creaNodo(Iscrizione iscritto, Nodo link)
 	{
-		Nodo nodo=new Nodo(persona);
+		Nodo nodo= new Nodo(iscritto);
 		nodo.setLink(link);
 		return nodo;
 	}
@@ -158,7 +165,7 @@ public class ListaIscrizioni
 		return (p.getInfo().toString());
 	}
 	
-	public Iscrizione getInfo(int posizione) throws IscrizioneException
+	public Iscrizione getIscritto(int posizione) throws IscrizioneException
 	{
 		if (elementi==0)
 			throw new IscrizioneException("Lista vuota");
@@ -167,7 +174,90 @@ public class ListaIscrizioni
 		
 		
 		Nodo p=getLinkPosizione(posizione);
-		Iscrizione i=new Iscrizione(p.getInfo());
-		return (i);
+		return p.getInfo() ;
+	}
+	public void esportaCSV (String nomeFile) throws IOException, IscrizioneException, FileException
+	{
+		TextFile file= new TextFile (nomeFile,'W');
+		String iscrittoCSV;
+		Iscrizione iscritto;
+		
+		for (int i = 1; i <= getElementi(); i++) 
+		{
+			iscritto=getIscritto(i);
+			iscrittoCSV=iscritto.getNome()+";"+iscritto.getCognome()+";"+iscritto.getData()+";"+ iscritto.getDestinazione()+ ";";
+			file.toFile(iscrittoCSV);
+		}
+		file.closeFile();
+		
+	}
+
+	public Agenzia importaCSV (String nomeFile) throws IOException, FileException, IscrizioneException, EccezioneTextFileEOF
+	{
+		Agenzia agenzia=new Agenzia();
+		TextFile file=new TextFile(nomeFile,'R');
+		String rigaLetta;
+		String[] elementiIscrizione;
+		Iscrizione iscrizione;
+		
+			try 
+			{
+				while(true)
+				{
+					rigaLetta=file.fromFile();
+					elementiIscrizione=rigaLetta.split(";");
+					iscrizione=new Iscrizione();
+					agenzia.inserisciInCoda(iscrizione);
+				}
+				
+			} 
+			catch (FileException e) 
+			{
+				if (e.toString().compareTo("End of file")==0)
+					file.closeFile();
+				else
+					throw new FileException(e.toString());
+			}
+		
+			return agenzia;		
+			
+	}
+	public void salvaAgenzia(String nomeFile) throws IOException
+	{
+		FileOutputStream file =new FileOutputStream(nomeFile);
+		ObjectOutputStream writer=new ObjectOutputStream(file);
+		writer.writeObject(this);
+		writer.flush();
+		file.close();
+	}
+	
+	public Agenzia caricaAgenzia (String nomeFile) throws IOException, ClassNotFoundException
+	{
+		FileInputStream file=new FileInputStream(nomeFile);
+		ObjectInputStream reader= new ObjectInputStream(file);
+		
+		Agenzia agenzia;
+		
+		agenzia=(Agenzia)(reader.readObject());
+		file.close();
+		return agenzia;
+	}
+
+	
+	public int cercaPosizione(int IdDaEliminare) 
+	{
+		
+		Nodo p=head;
+		
+		int posizioneDaEliminare=0;
+		for (int i = 1; i < elementi; i++) 
+		{
+			if (p.getInfo().getId()==IdDaEliminare)
+			{
+				posizioneDaEliminare=i;
+			}
+		}
+		return posizioneDaEliminare;
 	}
 }
+

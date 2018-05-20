@@ -11,20 +11,23 @@ public class Nodo
 		link=null;
 	}
 
-	public Iscrizione getInfo() {
+	public Iscrizione getInfo() 
+	{
 		return info;
 	}
 
 	public void setInfo(Iscrizione info) 
 	{
-		this.info = new Iscrizione( info);
+		this.info = info;
 	}
 
-	public Nodo getLink() {
+	public Nodo getLink() 
+	{
 		return link;
 	}
 
-	public void setLink(Nodo link) {
+	public void setLink(Nodo link)
+	{
 		this.link = link;
 	}
 }
