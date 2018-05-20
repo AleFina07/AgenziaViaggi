@@ -18,8 +18,9 @@ public class MainClass {
 		Iscrizione i3=new Iscrizione("Alessandru", "Finassi"+" ", 1, dataPartenza3, "Egitto");
 		*/
 		
-		
-		
+		int controllo = 0;
+		int variabile = 0;
+		int id=0;
 		
 		Agenzia a1=new Agenzia();
 		
@@ -39,7 +40,8 @@ public class MainClass {
 			String nomefile= "iscrizione.bin";
 				
 			int continuare=1;
-
+		do {
+			
 			switch (menu.scelta()) 
 			{
 			
@@ -48,7 +50,7 @@ public class MainClass {
 				
 				System.out.println("Inserisci i campi del nuovo iscritto");
 				
-				int id=0;	
+					
 				String nome;
 				String cognome;
 				LocalDate dataPartenza;
@@ -95,7 +97,19 @@ public class MainClass {
 					System.out.println("Errore nel salvataggio dei dati");
 				}
 				
-				System.out.println(menu.scelta());
+				System.out.println("Se vuoi procedere all'uso del software premere '1'");
+				try 
+				{
+					controllo=tastiera.readInt();
+				}
+				catch (NumberFormatException e) 
+				{
+				
+				} 
+				catch (IOException e) 
+				{
+					
+				}
 				break;
 				}
 				
@@ -136,21 +150,62 @@ public class MainClass {
 					e.printStackTrace();
 				}
 				
-				System.out.println(elenco);
+				System.out.println("Se vuoi procedere all'uso del software premere '1'");
+				try 
+				{
+					controllo=tastiera.readInt();
+				}
+				catch (NumberFormatException e) 
+				{
+				
+				} 
+				catch (IOException e) 
+				{
+					
+				}
+				
 				
 				break;
 				}	
 			}
 			case 3:
+			{
 				
+				try
+					{
+						a1.ordinaAlfabeto(a1);
+					}
+					catch (IscrizioneException e) 
+					{
+						e.printStackTrace();
+					}
+				
+					
+					System.out.println("Se vuoi procedere all'uso del software premere '1'");
+					try 
+					{
+						controllo=tastiera.readInt();
+					}
+					catch (NumberFormatException e) 
+					{
+					
+					} 
+					catch (IOException e) 
+					{
+						
+					}
 				break;
+			}
+				
+				
 			case 4:
 			{
 								break;
 			}
 			
 		}
-		
+			
+		}while(controllo == 1);
 		System.out.println(a1.toString());
 		
 				/*//***************scrittura*********************

@@ -3,6 +3,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.Scanner;
 
 public class Agenzia
 {
@@ -176,6 +177,8 @@ public class Agenzia
 		Nodo p=getLinkPosizione(posizione);
 		return p.getInfo() ;
 	}
+	
+	
 	public void esportaCSV (String nomeFile) throws IOException, IscrizioneException, FileException
 	{
 		TextFile file= new TextFile (nomeFile,'W');
@@ -258,6 +261,80 @@ public class Agenzia
 			}
 		}
 		return posizioneDaEliminare;
+	}
+	
+	public static int controlloInputInt()
+	{
+		Scanner tastiera = new Scanner(System.in);
+		int controllo = 0;
+		do
+		{
+		try 
+		{
+			controllo  = tastiera.nextInt();
+			break;
+		} 
+		catch (java.util.InputMismatchException e) 
+		{
+			System.out.println("Inserimento sbagliato... RIPROVA");
+			tastiera.nextLine();
+		}	
+		}while(true);
+		
+		return controllo;
+	}
+	
+	public void ordinaAlfabeto(Agenzia iscritto) throws IscrizioneException
+	{
+		boolean controllo = true;
+		int elementi = iscritto.getElementi()+1;
+		Agenzia iscritto1 = new Agenzia();
+		for (int i = 1; i < elementi; i++) 
+		{
+			iscritto1.inserisciInposizione(iscritto.getLinkPosizione(i).getInfo(), i);
+		}
+		elementi--;
+	do
+	{
+		controllo = true;
+		for (int i = 1; i < elementi; i++) 
+		{
+			if (iscritto1.getLinkPosizione(i).getInfo().getNome().compareTo(iscritto1.getLinkPosizione(i+1).getInfo().getNome())<0)
+			{
+				
+			}
+			else if (iscritto1.getLinkPosizione(i).getInfo().getNome().compareTo(iscritto1.getLinkPosizione(i+1).getInfo().getNome())>0)
+			{
+				iscritto1.inserisciInposizione(iscritto1.getLinkPosizione(i+1).getInfo(), i);
+				iscritto1.eliminaInPosizione(i+2);
+				controllo = false;
+			}
+			else if (iscritto1.getLinkPosizione(i).getInfo().getNome().compareTo(iscritto1.getLinkPosizione(i+1).getInfo().getNome())==0)
+			{
+				if (iscritto1.getLinkPosizione(i).getInfo().getCognome().compareTo(iscritto1.getLinkPosizione(i+1).getInfo().getCognome())==0)
+				{
+				}
+				else if (iscritto1.getLinkPosizione(i).getInfo().getCognome().compareTo(iscritto1.getLinkPosizione(i+1).getInfo().getCognome())>0)
+				{
+					iscritto1.inserisciInposizione(iscritto1.getLinkPosizione(i+1).getInfo(), i);
+					iscritto1.eliminaInPosizione(i+2);
+					controllo = false;
+				}
+				else if (iscritto1.getLinkPosizione(i).getInfo().getCognome().compareTo(iscritto1.getLinkPosizione(i+1).getInfo().getCognome())<0)
+				{
+				}
+			}
+			
+			}
+		}while(controllo == false);			
+		elementi++;
+		for (int i = 1; i < elementi; i++) 
+		{
+			iscritto1.getLinkPosizione(i).getInfo().toString();
+		}
+		System.out.println("Visualizzazione completata");
+		System.out.println("--------------------------------------------------");
+		System.out.println();
 	}
 }
 
