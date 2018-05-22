@@ -39,6 +39,15 @@ public class MainClass {
 			Menu menu= new Menu(null, elenco);
 			String nomefile= "iscrizione.bin";
 				
+			try 
+			{
+				a1=a1.caricaLista("iscrizioni.bin");
+			} 
+			catch (ClassNotFoundException | IOException e) 
+			{
+				System.out.println("Impossibile caricare la lista");
+			}
+			
 			int continuare=1;
 		do {
 			
@@ -50,7 +59,7 @@ public class MainClass {
 				
 				System.out.println("Inserisci i campi del nuovo iscritto");
 				
-					
+				int codiceIdentificativo;
 				String nome;
 				String cognome;
 				LocalDate dataPartenza;
@@ -59,8 +68,8 @@ public class MainClass {
 				try 
 				{
 					System.out.println("Id dell'utente sarà:"+ id);
+					codiceIdentificativo= id;
 					id++;
-					
 					System.out.println("Inserire il nome:   ");
 					nome =tastiera.readString();
 					
@@ -81,7 +90,19 @@ public class MainClass {
 					
 					a1.inserisciInTesta(iscritto);
 					
-					a1.esportaCSV("iscrizioni.csv");
+					try 
+					{
+						a1.registraIscrizione(iscritto);
+					}
+					catch (IscrizioneException e1) 
+					{
+						
+						System.out.println(e1.toString());
+						break;
+					}
+					
+					
+					
 					
 					
 					/*
@@ -121,12 +142,20 @@ public class MainClass {
 				try 
 				{
 					int IdDaEliminare = tastiera.readInt();
-					IdDaEliminare = a1.cercaPosizione(IdDaEliminare);
+					//IdDaEliminare = a1.cercaPosizione(IdDaEliminare);
+					try 
+					{
+						a1.eliminaInPosizione(a1.cercaPosizione(IdDaEliminare));
+					}
+					catch (IscrizioneException e1) 
+					{
+						e1.printStackTrace();
+					}
 					
 					Agenzia i1= new Agenzia();
 					try 
 					{
-						i1=a1.caricaAgenzia("iscrizioni.csv");
+						i1=a1.caricaAgenzia("iscrizioni.txt");
 						System.out.println("caricamento ok");
 					} 
 					catch (IOException e) 
@@ -137,8 +166,7 @@ public class MainClass {
 						System.out.println("Classe non trovata");
 					}
 					
-					
-					
+		
 					System.out.println(a1.toString());
 				} 
 				catch (NumberFormatException e)
@@ -170,16 +198,23 @@ public class MainClass {
 			}
 			case 3:
 			{
-				
-				try
-					{
-						a1.ordinaAlfabeto(a1);
-					}
-					catch (IscrizioneException e) 
-					{
-						e.printStackTrace();
-					}
-				
+				try 
+				{
+					
+					Iscrizione[] p2=new Iscrizione[a1.getElementi()];
+					p2=a1.selectionSortCrescenteNome(a1);
+					System.out.println("Iscritti in ordine di nome ");
+					for (int i = 0; i < p2.length; i++) 
+				{
+					System.out.println(p2[i].toString());
+				}
+				}
+				catch (IscrizioneException e) 
+				{
+					System.out.println(e.toString());
+					break;
+				} 
+			
 					
 					System.out.println("Se vuoi procedere all'uso del software premere '1'");
 					try 
@@ -200,6 +235,19 @@ public class MainClass {
 				
 			case 4:
 			{
+				System.out.println("Se vuoi procedere all'uso del software premere '1'");
+				try 
+				{
+					controllo=tastiera.readInt();
+				}
+				catch (NumberFormatException e) 
+				{
+				
+				} 
+				catch (IOException e) 
+				{
+					
+				}
 								break;
 			}
 			

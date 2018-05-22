@@ -1,13 +1,14 @@
+/Agenzia.class
 /ConsoleInput.class
 /EccezioneTextFileEOF.class
 /FileException.class
 /IscizioniCoda.class
 /Iscrizione.class
 /IscrizioneException.class
-/ListaIscrizioni.class
+/IscrizioneTest.class
 /MainClass.class
 /Menu.class
 /Nodo.class
+/NodoTest.class
 /Ordinatore.class
 /TextFile.class
-/Agenzia.class
